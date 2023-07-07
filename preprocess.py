@@ -2,7 +2,8 @@ import os
 import sys
 import csv
 from pydub.utils import mediainfo
-import phonemizer
+from phonemizer.backend import EspeakBackend
+import hparams
 def write_audio_files(input_folder):
     with open('train.txt', 'w') as output_file:
         for file_name in os.listdir(input_folder):
@@ -14,6 +15,13 @@ def write_audio_files(input_folder):
     os.system("""tail -n 5 train.txt > eval.txt && sed -i -e :a -e '$d;N;2,5ba' -e 'P;D' train.txt""")
 
 def write_text_files(input_folder):
+    phonemizer= EspeakBackend(
+        hparams.defaults['lang'],
+        punctuation_marks=';:,.!?',
+        preserve_punctuation=True,
+        with_stress=True,
+        language_switch='remove-flags'
+    )
     metadata_file = os.path.join(input_folder, 'metadata.csv')
     wav_folder = os.path.join(input_folder, 'wavs')
 
@@ -21,7 +29,9 @@ def write_text_files(input_folder):
         csvreader = csv.reader(csvfile, delimiter='|')
         for row in csvreader:
             file_path = os.path.join(wav_folder, row[0] + '.wav')
-            output_file.write(f"{file_path}|{row[1]}\n")
+            text=row[1]
+            text=phonemizer.phonemize(text)
+            output_file.write(f"{file_path}|{text}\n")
     #creating eval.txt, that contains the last 5 lines from train.txt, and deleting them out of train.txt using bash
     os.system("""tail -n 5 train.txt > eval.txt && sed -i -e :a -e '$d;N;2,5ba' -e 'P;D' train.txt""")
 def main():

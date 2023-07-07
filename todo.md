@@ -1,0 +1,2 @@
+- [ ] figure out if punctuation in preprocess for phonemization should be defined more strictly
+- [ ] check what behaviour it has to speaker identification even in pretraining. DOesn't seem to have an effect because files are all grouped without info
