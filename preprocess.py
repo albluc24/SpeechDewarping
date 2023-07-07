@@ -1,3 +1,4 @@
+from tqdm import tqdm
 import os
 import sys
 import csv
@@ -6,7 +7,7 @@ from phonemizer.backend import EspeakBackend
 import hparams
 def write_audio_files(input_folder):
     with open('train.txt', 'w') as output_file:
-        for file_name in os.listdir(input_folder):
+        for file_name in tqdm(os.listdir(input_folder)):
             if file_name.endswith('.wav'):
                 file_path = os.path.join(input_folder, file_name)
                 audio_info = mediainfo(file_path)
@@ -27,7 +28,7 @@ def write_text_files(input_folder):
 
     with open(metadata_file, 'r') as csvfile, open('train.txt', 'w') as output_file:
         csvreader = csv.reader(csvfile, delimiter='|')
-        for row in csvreader:
+        for row in tqdm(csvreader):
             file_path = os.path.join(wav_folder, row[0] + '.wav')
             text=row[1]
             text=phonemizer.phonemize(text)
