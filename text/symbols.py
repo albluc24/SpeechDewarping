@@ -1,4 +1,4 @@
-PUNCTUATION = ['!', ',', '.', '?']
+PUNCTUATION = ['!', ',', '.', '?', ':', ';']
 SYMBOLS = [
     '_', '~', ' ', *PUNCTUATION, 'AA', 'AA0', 'AA1', 'AA2', 'AE', 'AE0',
     'AE1', 'AE2', 'AH', 'AH0', 'AH1', 'AH2', 'AO', 'AO0', 'AO1', 'AO2', 'AW',
@@ -10,4 +10,4 @@ SYMBOLS = [
     'UW0', 'UW1', 'UW2', 'V', 'W', 'Y', 'Z', 'ZH'
 ]
 
-symbols = SYMBOLS
+symbols=list(open('espeak-phoneme-symbols.txt', 'r').read())
