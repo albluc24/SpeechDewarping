@@ -8,7 +8,7 @@ defaults = {
     'epochs':500000, # Total Epochs to run. Set to a large enough value.
     'iters_per_checkpoint':2500, # The number of iterations between saving checkpoints.
     'training_files':'train.txt', # Filelists for training data. For the specific format of each line, follow the example filelists.
-    'validation_files':'val.txt', # Filelists for validation data.
+    'validation_files':'eval.txt', # Filelists for validation data.
     'seed':1234, # Random seed.
     'dynamic_loss_scaling':True,
     'fp16_run':False,
