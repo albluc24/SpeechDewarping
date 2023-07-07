@@ -502,10 +502,7 @@ class Tacotron2(nn.Module):
         self.mask_padding = hparams.mask_padding
         self.n_mel_channels = hparams.n_mel_channels
         self.n_frames_per_step = hparams.n_frames_per_step
-        if hparams.iskorean:
-            n_symbols = hparams.n_symbols_korean
-        else:
-            n_symbols = hparams.n_symbols
+        n_symbols = hparams.n_symbols
         self.embedding = nn.Embedding(n_symbols, hparams.symbols_embedding_dim)
         self.speaker_embedding = nn.Embedding(hparams.num_speaker, hparams.speaker_embedding_dim)
 

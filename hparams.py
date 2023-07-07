@@ -27,7 +27,6 @@ defaults = {
     'naive_speech_autoencoder':False,
     
     'lang':'it', #This option matters only when text_finetune is True. It denotes the language that should be used by the espeak phonemizer backend. This repository theoretically supports all languages supported by espeak-ng, but it has been tested with italian in mind because the espeak-phoneme-symbols.txt files contains all the symbols found in a corpus of italian phonemized text
-    'iskorean':False, # This option matters only when text_finetune is True. It denotes whether the fine-tuning text is Korean or not. This repository only supports English and Korean.
     'naive_resize_factor': 1/6, # Refer to line14 of Section2.2 in our paper.
     'concat_speaker_embedding':True, # Whether to concatenate speaker embeddings to the Tacotron encoder's output.
     'num_speaker': 1, # Number of speakers. When using the LibriTTS train-clean-100 split, it is 247. When text-fine-tuning with a single speaker, set to 1.
@@ -64,7 +63,6 @@ defaults = {
     
     # Model Parameters
     'n_symbols':len(symbols),
-    'n_symbols_korean':0,
     'symbols_embedding_dim':512,
     'mel_embedding_dim':512,
     'mel_resize_step_num':1,
