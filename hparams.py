@@ -1,5 +1,4 @@
 from text import symbols
-from text_kr import symbols as symbols_korean
 import argparse
 
 
@@ -8,8 +7,8 @@ defaults = {
     # Training Parameters
     'epochs':500000, # Total Epochs to run. Set to a large enough value.
     'iters_per_checkpoint':2500, # The number of iterations between saving checkpoints.
-    'training_files':'filelists/libritts/train.txt', # Filelists for training data. For the specific format of each line, follow the example filelists.
-    'validation_files':'filelists/libritts/val.txt', # Filelists for validation data.
+    'training_files':'train.txt', # Filelists for training data. For the specific format of each line, follow the example filelists.
+    'validation_files':'val.txt', # Filelists for validation data.
     'seed':1234, # Random seed.
     'dynamic_loss_scaling':True,
     'fp16_run':False,
@@ -27,10 +26,11 @@ defaults = {
     'speech_dewarping':True,
     'naive_speech_autoencoder':False,
     
+    'lang':'it', #This option matters only when text_finetune is True. It denotes the language that should be used by the espeak phonemizer backend. This repository theoretically supports all languages supported by espeak-ng, but it has been tested with italian in mind because the espeak-phoneme-symbols.txt files contains all the symbols found in a corpus of italian phonemized text
     'iskorean':False, # This option matters only when text_finetune is True. It denotes whether the fine-tuning text is Korean or not. This repository only supports English and Korean.
     'naive_resize_factor': 1/6, # Refer to line14 of Section2.2 in our paper.
     'concat_speaker_embedding':True, # Whether to concatenate speaker embeddings to the Tacotron encoder's output.
-    'num_speaker': 247, # Number of speakers. When using the LibriTTS train-clean-100 split, it is 247. When text-fine-tuning with a single speaker, set to 1.
+    'num_speaker': 1, # Number of speakers. When using the LibriTTS train-clean-100 split, it is 247. When text-fine-tuning with a single speaker, set to 1.
     'speaker_embedding_dim':32, # The dimension of the speaker embeddings.
 
     'segaug':False, # Whether to use the proposed SegAug augmentation during text-fine tuning. In the pre-training scenarios, this option is not used.
@@ -64,7 +64,7 @@ defaults = {
     
     # Model Parameters
     'n_symbols':len(symbols),
-    'n_symbols_korean':len(symbols_korean),
+    'n_symbols_korean':0,
     'symbols_embedding_dim':512,
     'mel_embedding_dim':512,
     'mel_resize_step_num':1,
