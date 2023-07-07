@@ -303,7 +303,6 @@ if __name__ == '__main__':
     add_hparams(parser)
     args = parser.parse_args()
     hparams = get_hparams(args, parser)
-
     os.makedirs(args.output_directory, exist_ok=True)
     subprocess.call(f"cp hparams.py {args.output_directory}", shell = True)
     
