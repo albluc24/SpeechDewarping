@@ -37,7 +37,7 @@ defaults = {
 
     # Audio Parameters
     'max_wav_value':32768.0,
-    'sampling_rate':16000,
+    'sampling_rate':22050,
     'filter_length':2048,
     'hop_length':200,
     'win_length':800,
@@ -101,7 +101,7 @@ defaults = {
     'learning_rate':1e-3, # Initial learning rate. Used when use_saved_learning_rate is False.
     'weight_decay':1e-6,
     'grad_clip_thresh':1.0,
-    'batch_size':16,
+    'batch_size':1,#originally 16 have no idea if it influences training yet
     'mask_padding':True,  # set model's padded outputs to padded values
     'gate_loss_weight':1.0,
     
