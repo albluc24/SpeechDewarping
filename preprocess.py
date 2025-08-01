@@ -1,5 +1,5 @@
 import soundfile as sf
-import os
+import os, glob
 import sys
 import csv
 import hparams
@@ -8,11 +8,11 @@ from tqdm import tqdm
 
 def write_audio_files(input_folder):
     with open('train.txt', 'w') as output_file:
-        for file_name in tqdm(os.listdir(input_folder)):
-            if file_name.endswith('.wav'):
-                file_path = os.path.join(input_folder, file_name)
-                audio_info = sf.info(file_path).duration
-                output_file.write(f"{file_path}|{audio_info}\n")
+        for file_name in tqdm(glob.glob(f"{input_folder}/*/*.wav")):
+            #file_path = os.path.join(input_folder, file_name)
+            file_path=file_name
+            audio_info = sf.info(file_path).duration
+            output_file.write(f"{file_path}|{audio_info}\n")
     #creating eval.txt, that contains the last 5 lines from train.txt, and deleting them out of train.txt using bash
     os.system("""tail -n 5 train.txt > eval.txt && sed -i -e :a -e '$d;N;2,5ba' -e 'P;D' train.txt""")
 
